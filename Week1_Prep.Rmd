@@ -1,0 +1,228 @@
+---
+title: "Readings lecture 1 - MDS"
+author: "Bo Crauwels"
+date: "1/24/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R Tutorial Intro
+
+## Basic data types 
+
+Numeric data: 
+```{r}
+x = 10.5
+class(x)
+```
+
+```{r}
+k = 10
+class(k)
+is.integer(k)
+```
+
+Integer data: 
+```{r}
+y = as.integer(3)
+class(y)
+is.integer(y)
+as.integer(3.141592) #coerce decimal to integer 
+as.integer("3.141592") #coerce string to integer
+as.integer('Bo') #cannot coerce non-decimal string to integer
+```
+
+Complex value: 
+```{r}
+z = 1 + 2i #complex values are defined by i (imaginary value)
+class(z)
+```
+
+Logical value: 
+i.e., pften a comparison between variables
+```{r}
+x = 1; y=2 #creating two variables in same line 
+z = x>y
+z
+class(z)
+```
+
+```{r}
+u = TRUE; v = FALSE# logical operations are &, | and !
+u&v
+u|v
+!u
+```
+
+Character values: 
+```{r}
+x = as.character(32.3)
+class(x)
+fname = "bo"; lname = "crauwels"
+paste (fname, lname)
+sprintf("%s has %d dollars", "Bo", 20)#readable string w sprintf function 
+sub("little", "big", "Bo has a little room")
+```
+
+##Vector 
+
+A vector is a sequence of data elements of the same basic type. 
+```{r}
+c(2,3,5)
+c(T,F,T,F)
+c("a", "b", "c")
+length(c("a", "b", "c"))
+```
+
+Combining vectors: 
+```{r}
+n = c(2,3,5); s = c("a", "b")
+c(n,s)
+```
+
+Vector arithmetics: 
+```{r}
+a = c(1,3,5,6)
+b = c(1,2,3,4)
+5*a
+a+b
+a = c(a,2)
+a+b #recycling rule, b will be recycled cause shorter
+```
+
+Vector index: 
+```{r}
+s = c("aa", "bb", "cc", "dd")
+s[4]
+s[-1]
+```
+
+Numeric index vector: 
+```{r}
+s = c("aa", "bb", "cc", "dd", "ee")
+s[c(2,3)]
+s[c(2:4)]
+```
+
+Logical index vector: 
+```{r}
+s = c("aa", "bb", "cc", "dd", "ee")
+L = c(F,T,T,F,F)
+s[L]
+```
+
+Named vector members: 
+```{r}
+v = c("Mary", "Sue")
+names(v)= c("first", "last")
+v
+v[c("last", "first")]
+```
+
+##Matrix 
+
+Matrices are data arranged in a two-dimensional rectangular layout. Creating a matrix: 
+```{r}
+A = matrix(
+  c(2,4,3,1,5,7), #data input
+  nrow = 2,
+  ncol=3,
+  byrow = T
+)
+A
+A[2,3]
+A[2,]
+A[,3]
+A[, c(2,3)]
+
+dimnames(A)= list(
+  c("row1", "row2"),
+  c("col1", "col2", "col3")
+)
+A
+```
+
+Matrix construction: 
+```{r}
+t(A) #transpose
+
+B = matrix(
+  c(1,1,1,1,1,1), #data input
+  nrow = 2,
+  ncol=3
+)
+
+cbind(A,B) #column bind
+rbind(A,B) #row bind 
+c(B)#deconstruct matrix 
+```
+
+##List 
+
+A list is a vector containing other objects
+```{r}
+n = c(2,3,5)
+s = c("aa", "bb", "cc", "dd")
+b = c(T,T,F)
+x = list(n,s,b,3)
+x #contains copies of above objects
+x[2] #retrieving list member
+x[c(2,3)]
+x[[2]] #referencing list member
+
+# a referenced list member is not the original member, so you can modify it without modifying the original member 
+
+x[[2]][1] = "hey"
+x[[2]]
+s
+```
+
+Named list members:
+```{r}
+v = list(bob=c(2,3), john = c(1,2))
+v['bob']
+v[c("john", "bob")]
+```
+
+##Data frame: 
+
+Data frames are used for storing data tables. It's a list of vectors of equal length. 
+
+```{r}
+n = c(2,3,5)
+s = c("aa", "bb", "cc")
+b = c(T,T,F)
+df = data.frame(n,s,b)
+nrow(df)
+ncol(df)
+head(df)
+```
+
+df column vector: 
+```{r}
+df[[2]]
+```
+
+df column slice: 
+```{r}
+df[2]
+df[c(1,2)]
+```
+
+df row slice: 
+```{r}
+df[1,]
+df[c(1,2),]
+```
+
+logical indexing: 
+```{r}
+L = df == 3
+L
+df[L,] #list of rows in df that contain 3 
+```
+
+

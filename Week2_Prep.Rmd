@@ -1,0 +1,64 @@
+---
+title: "Week 2 class prep MDS"
+author: "Bo Crauwels"
+date: "1/24/2022"
+output: html_document
+---
+
+## General things 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The green c button above allows adding a code chunk, which looks like this:
+```{r include= FALSE, echo=FALSE, message=FALSE, warning = FALSE}
+
+```
+
+You can also use add inline code, of which the results (but not code) will be directly displayed. Such as `r 2+2` . 
+
+You can also use other coding language chunks, such as python or javascript. 
+```{python}
+
+```
+
+When you want to re-render the same report with different inputs (e.g., Arizona instead of Texas), you use the parameters argument. Parameters are specified in the YAML header and then referred to when knitting (knit with params), that's it! No adjusting the entire code here. Learn more about parameters at https://bookdown.org/yihui/rmarkdown/parameterized-reports.html
+
+## Tables 
+
+Tables can be nicely formatted using knitr::kable 
+
+```{r echo = FALSE, results = 'asis'}
+library(knitr)
+kable(mtcars[1:5,], caption = "A knitr kable.")
+```
+
+## Markdown basics
+
+You can format text as follows:
+
+- *italics*
+- **bold**
+- `code`
+- [links](rmarkdown.rstudio.com)
+- Latex equations, $E = mc^[2]$
+- bibliographies, [@rmarkdown15]
+
+## Output formats 
+
+in the console, type: 
+`library(rmarkdown)`
+`render("Week2_Prep.Rmd", output_format = "word_document")`
+
+## Notebooks 
+
+
+
+
+
+
+
+
+
+
